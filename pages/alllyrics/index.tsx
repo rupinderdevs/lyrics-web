@@ -35,28 +35,74 @@ const AllLyrics: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <section className="text-gray-600 body-font">
-                            <div className="container px-5 py-24 mx-auto">
-                                <div className="flex flex-wrap -m-4">
-            {data.map((value: any) => {
-                return (
-                    <>                                                           
+            {/*  */}
+            <div className="mt-10">
+						<div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {data.map((value: any) => {
+                        return (
+                            <div key={value.title} className="pt-6">
+                                <div className="flow-root bg-light rounded-lg px-4 pb-8">
+                                    <div className="-mt-6">
+                                        <div className="flex items-center justify-center">
+                                            <span className="p-2">
+                                            <Image src={Music} alt='music' className="rounded w-9/12 m-auto"/>
+
+                                            </span>
+                                        </div>
+                                        <div className="text-center justify-center items-center">
+                                            <h3 className="mt-4 text-lg font-bold w-full break-words overflow-x-auto text-primary tracking-tight">
+                                            {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
+
+                                            </h3>
+                                            <span className="mt-2 text-sm text-secondary block">
+                                            {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
+
+                                            </span>
+                                            {/* <p className="leading-relaxed mb-3"
+                                                    key={value.id}
+                                                    dangerouslySetInnerHTML={{ __html: value.content.rendered }}>
+                                                </p> */}
+                                            <button
+                                                className="mt-5 text-md text-active"
+                                                // onClick={() => {
+                                                //     getLyrics(song.result.id);
+                                                // }}
+                                            >
+                                                Get Lyrics &rarr;
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+						</div>
+					</div>
+
+            {/*  */}
+
+            {/* <section className="text-gray-600 body-font">
+                <div className="container px-5 py-24 mx-auto">
+                    <div className="flex flex-wrap -m-4">
+                        {data.map((value: any) => {
+                            return (
+                                <>
                                     <div className="p-4 md:w-1/3">
                                         <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                         
-                                              
-                                <Image src={Music} alt='music'/>
+
+
+                                            <Image src={Music} alt='music' />
 
                                             <div className="p-6">
                                                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                                     Mix
                                                 </h2>
                                                 <h1 className="title-font font-bold text-lg font-medium text-gray-900 mb-3">
-                                        {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
+                                                    {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
                                                 </h1>
                                                 <p className="leading-relaxed mb-3"
-                                                key={value.id}
-                                dangerouslySetInnerHTML={{ __html: value.content.rendered }}>
+                                                    key={value.id}
+                                                    dangerouslySetInnerHTML={{ __html: value.content.rendered }}>
                                                 </p>
                                                 <div className="flex items-center flex-wrap ">
                                                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
@@ -106,13 +152,13 @@ const AllLyrics: NextPage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                              
-                    </>
-                );
-            })}
-                            </div>
-                            </div>
-                        </section>
+                                    </div>
+                                </>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section> */}
         </>
     );
 };
