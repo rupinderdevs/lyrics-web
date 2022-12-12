@@ -28,7 +28,7 @@ export default function Home({ data }) {
 					{data.map((post, index) => {
 						return <Link href={`/post/${post['slug']}`}>
 
-							<div className="h-full bg-gray-100 flex justify-center items-center">
+							<div key={index} className="h-full bg-gray-100 flex justify-center items-center">
 								<div className="container flex justify-center">
 									<div className="max-w-sm">
 										<div className="bg-white relative shadow-lg hover:shadow-xl transition duration-500 rounded-lg">
@@ -70,10 +70,9 @@ export default function Home({ data }) {
 
 
 export const getServerSideProps = async () => {
-	const getPosts = await fetch(`${process.env.NEXT_APP_BASE_URL}/wp-json/wp/v2/posts?_embed`);
+	const getPosts = await fetch(`https://www.alldesilyrics.com/wp-json/wp/v2/posts?_embed`);
 	const data = await getPosts.json();
-	console.log("response--_+++--", data);
-
+	
 	return { props: { data } }
 	// try {
 	// 	const getPosts = await axios({
