@@ -2,155 +2,89 @@
 import Head from 'next/head'
 import { useState } from 'react';
 import axios from 'axios';
+import { NextPage } from 'next';
 import Link from 'next/link';
+import Hero from 'components/hero-section';
 
-const Home = () => {
-	const [title, setTitle] = useState('Sidhu Moosewala'); // Stores the input title by the user, with the default value being "Alan Walker"
-	const [searchResults, setSearchResults] = useState(null); // Stores the search results returned by the API
-	const [lyrics, setLyrics] = useState(null); // Stores the lyrics returned by the API
-	// const [song, setSongs] = useState();
+export default function Home({ data }) {
+	console.log('data++', data);
+	// const [title, setTitle] = useState('Sidhu Moosewala'); // Stores the input title by the user, with the default value being "Alan Walker"
+	// const [searchResults, setSearchResults] = useState(null); // Stores the search results returned by the API
+	// const [lyrics, setLyrics] = useState(null); // Stores the lyrics returned by the API
 
-	const getResults = async () => {
-		try {
-			const res = await axios.get('api/search/', {
-				params: { title }
-			});
-			const { data } = res;
-			setSearchResults(data.response.hits);
-			console.log('getResults', data.response.hits);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const getLyrics = async id => {
-		try {
-			setSearchResults(null);
-			const res = await axios.get('api/lyrics/', {
-				params: { id }
-			});
-			const { data } = res;
-			setLyrics(data.response.lyrics);
-			console.log('getLyrics', data.response.lyrics);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
+	const [More, setMore] = useState();
 
 	return (
-
-		<div className="flex flex-col justify-center py-2">
+		<>
 			<Head>
 				<title>Lyrics Web</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
+			<Hero />
 
-			{/*  */}
-			<div className="flex flex-col md:px-12 px-0 relative bg-background font-poppins items-center min-h-screen">
-				{/* title */}
-				<h1 className="text-6xl font-bold text-primary mt-10">
-					<span className="text-active">R</span> P
-				
-				</h1>
-				<Link href="/alllyrics" className="text-6xl font-bold text-primary ">All Lyrics</Link>
-		
-				<h2 className="text-primary text-2xl font-light mt-6">
-					Get the complete Lyrics of any given track.
-				</h2>
+			<div className="max-w-6xl mx-auto py-20 px-8 md:px-8">
+				<div className='grid grid-cols-3 gap-6 w-full'>
+					{data.map((post, index) => {
+						return <Link href={`/post/${post['slug']}`}>
 
-				{/* form */}
+							<div className="h-full bg-gray-100 flex justify-center items-center">
+								<div className="container flex justify-center">
+									<div className="max-w-sm">
+										<div className="bg-white relative shadow-lg hover:shadow-xl transition duration-500 rounded-lg">
+											<img
+												className="w-full rounded-t-lg"
+												src={post['_embedded']['wp:featuredmedia'][0]['source_url']} width="100%" alt="song"
 
-				<form
-					className="sm:mx-auto mt-20 justify-center sm:w-full sm:flex"
-					onSubmit={e => {
-						getResults();				
-						e.preventDefault();
-						e.stopPropagation();
-					}}
-				>
-					<input
-						type="text"
-						className="flex w-full sm:w-1/3 rounded-lg px-5 py-3 text-base text-background font-semibold focus:outline-none focus:ring-2 focus:ring-active"
-						placeholder="Enter a track or artist name eg: Sidhu Moosewala"
-						onChange={e => {
-							setTitle(e.target.value);
-							setSearchResults(null);
-							setLyrics(null);
-						}}
-					/>
-					<div className="mt-4 sm:mt-0 sm:ml-3">
-						<button
-							className="block w-full rounded-lg px-5 py-3 bg-active text-base text-primary font-bold hover:text-active hover:bg-primary sm:px-10"
-							type="submit"
-						>
-							Search
-						</button>
-					</div>
-				</form>
-				{/* form end */}
-				{searchResults && (
-					<div className="mt-10">
-						<div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-							{searchResults.map(song => (
-								<div key={song.result.id} className="pt-6">
-									<div className="flow-root bg-light rounded-lg px-4 pb-8">
-										<div className="-mt-6">
-											<div className="flex items-center justify-center">
-												<span className="p-2">
-													<img
-														src={
-															song.result
-																.song_art_image_thumbnail_url
-														}
-														className="w-full h-full rounded-lg"
-														alt={
-															song.result
-																.song_art_image_thumbnail_url
-														}
-													/>
-												</span>
-											</div>
-											<div className="text-center justify-center items-center">
-												<h3 className="mt-4 text-lg font-bold w-full break-words overflow-x-auto text-primary tracking-tight">
-													{song.result.title}
-												</h3>
-												<span className="mt-2 text-sm text-secondary block">
-													{song.result.artist_names}
-												</span>
-												<button
-													className="mt-5 text-md text-active"
-													onClick={() => {
-														getLyrics(song.result.id);
-													}}
-												>
-													Get Lyrics &rarr;
+											/>
+											<div className="py-6 px-8 rounded-lg bg-white">
+												<h1 className="text-gray-700 font-bold text-2xl mb-3 hover:text-gray-900 hover:cursor-pointer">
+													{post['title']['rendered'].replace(/[^a-zA-Z ]/g, " ")}
+												</h1>
+												<button className="mt-6 py-2 px-4 bg-yellow-400 text-red-800 font-bold border-red-900 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+													Get Lyrics
 												</button>
 											</div>
+											{/* <div className="absolute top-2 right-2 py-2 px-4 !bg-white rounded-lg">
+          <span className="text-md">$150</span>
+        </div> */}
 										</div>
 									</div>
 								</div>
-							))}
-						</div>
-					</div>
-				)}
-				{/* other section */}
-				{lyrics && (
-					<div className="mt-10 max-w-2xl">
-						<h2 className="text-2xl font-bold text-center text-active">
-							Lyrics for {lyrics.tracking_data.title}
-						</h2>
-						<p className="mt-6 leading-loose text-primary text-xl">
-							{lyrics.lyrics.body.plain}
-						</p>
-					</div>
-				)}
+							</div>
 
-				{/*  */}
+						</Link>
+
+						
+					})}
+					
+				</div>
+				<button className="flex justify-center items-center mx-auto mt-6 py-2 px-4 font-bold rounded-lg shadow-md hover:shadow-lg">
+           Load More
+          </button>
 			</div>
-		</div>
+		</>
 	)
 }
 
-export default Home
+
+
+export const getServerSideProps = async () => {
+	const getPosts = await fetch(`${process.env.NEXT_APP_BASE_URL}/wp-json/wp/v2/posts?_embed`);
+	const data = await getPosts.json();
+	console.log("response--_+++--", data);
+
+	return { props: { data } }
+	// try {
+	// 	const getPosts = await axios({
+	// 		method: "GET",
+	// 		url: "https://www.alldesilyrics.com/wp-json/wp/v2/posts?_embed",
+	// 	});
+	// 	if (res && res.data) {
+	// 		setdata(res.data);
+	// 	}
+	// 	console.log("response----", res.data);            
+	// } catch (error) {
+	// 	console.log(error);
+	// }
+}
