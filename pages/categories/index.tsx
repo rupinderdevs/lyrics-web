@@ -9,17 +9,18 @@ import Link from "next/link";
 
 
 const Categories: NextPage = () => {
+    const URL = `https://lyricsworldyou.com`;
     const [data, setdata] = useState([]);
     const getData = async () => {
         try {
             const res = await axios({
                 method: "GET",
-                url: `https://www.alldesilyrics.com/wp-json/wp/v2/categories`,
+                url: `${URL}/wp-json/wp/v2/categories`,
             });
             if (res && res.data) {
                 setdata(res.data);
             }
-            console.log("categories+++++", res.data);       
+                
         } catch (error) {
             console.log(error);
         }

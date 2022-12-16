@@ -6,19 +6,26 @@ import Music from '../../assets/music.jpg';
 import Image from "next/image";
 
 
-const AllLyrics: NextPage = () => {
+const Latest: NextPage = () => {
     const [data, setdata] = useState([]);
+  
+
+    const [showBlogCards, setShowBlogCards] = useState(3);
+
+    const loadMore = () => setShowBlogCards(showBlogCards + showBlogCards);
+    const slice = data.slice(0, showBlogCards);
+
+    
     const getData = async () => {
         try {
             const res = await axios({
                 method: "GET",
-                url: "https://www.alldesilyrics.com/wp-json/wp/v2/posts",
+                url: "https://www.alldesilyrics.com/wp-json/wp/v2/posts?_embed&per_page=18",
             });
 
             if (res && res.data) {
                 setdata(res.data);
-            }
-            console.log("response", res.data);
+            }            
         } catch (error) {
             console.log(error);
         }
@@ -36,7 +43,7 @@ const AllLyrics: NextPage = () => {
             </Head>
 
             {/*  */}
-            <div className="mt-10">
+            <div className="max-w-6xl mx-auto px-4 xl:px-0">
 						<div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {data.map((value: any) => {
                         return (
@@ -45,7 +52,7 @@ const AllLyrics: NextPage = () => {
                                     <div className="-mt-6">
                                         <div className="flex items-center justify-center">
                                             <span className="p-2">
-                                            <Image src={Music} alt='music' className="rounded w-9/12 m-auto"/>
+                                            <img src={value['_embedded']['wp:featuredmedia'][0]['source_url']} width={100} height={100} alt='song' className="rounded-2xl w-9/12 m-auto"/>
 
                                             </span>
                                         </div>
@@ -53,23 +60,11 @@ const AllLyrics: NextPage = () => {
                                             <h3 className="mt-4 text-lg font-bold w-full break-words overflow-x-auto text-primary tracking-tight">
                                             {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
 
-                                            </h3>
-                                            <span className="mt-2 text-sm text-secondary block">
-                                            {value.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
-
-                                            </span>
+                                            </h3>                                          
                                             {/* <p className="leading-relaxed mb-3"
                                                     key={value.id}
                                                     dangerouslySetInnerHTML={{ __html: value.content.rendered }}>
-                                                </p> */}
-                                            <button
-                                                className="mt-5 text-md text-active"
-                                                // onClick={() => {
-                                                //     getLyrics(song.result.id);
-                                                // }}
-                                            >
-                                                Get Lyrics &rarr;
-                                            </button>
+                                                </p> */}                                       
                                         </div>
                                     </div>
                                 </div>
@@ -77,10 +72,7 @@ const AllLyrics: NextPage = () => {
                         );
                     })}
 						</div>
-					</div>
-
-            {/*  */}
-
+					</div>        
             {/* <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-wrap -m-4">
@@ -163,4 +155,4 @@ const AllLyrics: NextPage = () => {
     );
 };
 
-export default AllLyrics;
+export default Latest;

@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Link from "next/link";
 
 interface Props {}
 
@@ -8,14 +9,13 @@ const Footer: NextPage<Props> = ({}) => {
       <div className="bg-gray-100 mt-10">
         <div className="container py-4 px-5">
           <p className="text-gray-500 text-sm text-center">
-            © 2022             <a
-              href="/"
-              rel="noopener noreferrer"
+            © 2022             <Link
+              href="/"          
               className="text-gray-600 ml-1"
               target="_blank"
             >
               @Lyrics Web Blog
-            </a>
+            </Link>
           </p>
           {/* <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             <a className="text-gray-500">
