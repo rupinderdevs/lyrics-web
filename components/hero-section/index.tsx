@@ -13,7 +13,7 @@ const Hero: NextPage<Props> = ({}) => {
         backgroundPosition: "50%",
         backgroundImage:
           'url("https://mdbootstrap.com/img/new/textures/full/142.jpg")',
-        height: 500
+        height: 400
       }}
     />
     <div className="container mx-auto px-6 md:px-12 xl:px-32">
@@ -26,8 +26,8 @@ const Hero: NextPage<Props> = ({}) => {
             backdropFilter: "blur(30px)"
           }}
         >
-          <h1 className="capitalize text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">
-            The best all songs lyrics web Blog  <br />
+          <h1 className="capitalize text-xl md:text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">
+            The best <span className="text-[#c02026]">all songs lyrics </span>web Blog  <br />
             <span className="text-blue-600">on the Internet</span>
           </h1>
           <Link
@@ -40,7 +40,7 @@ const Hero: NextPage<Props> = ({}) => {
             Latest
           </Link>
           <Link
-            className="inline-block px-7 py-3 text-white font-medium text-sm leading-snug bg-transparent text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
+            className="inline-block px-7 py-3 text-[#fff] font-medium text-sm leading-snug bg-[#c02026] text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
             data-mdb-ripple="true"
             data-mdb-ripple-color="light"
             href="/"
