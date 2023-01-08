@@ -1,24 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import type { NextPage } from "next";
 import Head from "next/head";
-import Music from 'assets/music.jpg';
+import Music from 'assets/images/music.png'
 import Image from "next/image";
-import { resolve } from "path";
-import Link from "next/link";
 
 
-const Categories: NextPage = () => {
-    const URL = `https://lyricsworldyou.com`;
+const Categories = () => { 
     const [data, setdata] = useState([]);
     const getData = async () => {
         try {
             const res = await axios({
                 method: "GET",
-                url: `${URL}/wp-json/wp/v2/categories`,
+                url: `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/categories`,
             });
             if (res && res.data) {
-                setdata(res.data);
+                setdata(res.data);                
             }
                 
         } catch (error) {
@@ -40,7 +36,7 @@ const Categories: NextPage = () => {
             {/*  */}
             <div className="mt-10 px-8">
 						<div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {data.map((value: any) => {
+                    {data.map((value) => {
                         return (
                             <div key={value.title} className="pt-6">
                                 <div className="flow-root bg-light rounded-lg px-4 pb-8">
@@ -53,12 +49,12 @@ const Categories: NextPage = () => {
                                         </div>
                                         <div className="text-center justify-center items-center">
 
-                                        <Link href={`/categories/${value.link}`}>
-                                            <h3 className="mt-4 text-lg font-bold w-full break-words overflow-x-auto text-primary tracking-tight">
+                                        <a href={`/categories/${value.slug.replace(/\-.*/,'')}`}>
+                                            <h3 className="mt-4 text-xl font-bold w-full break-words overflow-x-auto text-white tracking-tight">
                                             {value.name}
 
                                             </h3>                                                                             
-                                            </Link>                      
+                                            </a>                      
                                         </div>
                                     </div>
                                 </div>
