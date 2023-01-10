@@ -17,7 +17,7 @@ export default function Punjabi () {
     setpostLoading((postloading = true))
     try {
       const loaddata = await axios.get(
-        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=1&per_page=${perPage}&offset=${offsetValue}`       
+        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=${perPage}&offset=${offsetValue}`       
       )      
       setpostData((postData = loaddata?.data))
       setTotalpages((totalpages = loaddata?.headers['x-wp-totalpages']))

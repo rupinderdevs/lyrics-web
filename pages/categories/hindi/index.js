@@ -17,7 +17,7 @@ export default function Hindi () {
     setpostLoading((postloading = true))
     try {
       const loaddata = await axios.get(
-        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=3&per_page=${perPage}&offset=${offsetValue}`        
+        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=${perPage}&offset=${offsetValue}`        
       )      
       setpostData((postData = loaddata?.data))
       setTotalpages((totalpages = loaddata?.headers['x-wp-totalpages']))
