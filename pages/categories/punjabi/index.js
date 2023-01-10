@@ -6,16 +6,12 @@ import axios from 'axios'
 import Pagination from 'components/Pagination'
 
 export default function Punjabi () {
-console.log('pbi', process.env.NEXT_PRIVATE_URL);
   const [postData, setpostData] = useState([])
   const [postloading, setpostLoading] = useState(true)
   const [totalpages, setTotalpages] = useState(0)
   const [offsetValue, setOffsetValue] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const perPage = 15
-
-  // console.log('data',postData);
-
 
   const loadposts = async () => {
     setpostLoading((postloading = true))
