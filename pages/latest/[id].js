@@ -61,7 +61,7 @@ export default function SinglePost ({ data }) {
   if (!loading) {
     return (
       <>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1'>
 <div>
         <PageHeader title={data.title.rendered.replace(/[^a-zA-Z ]/g, " ")} />
 
