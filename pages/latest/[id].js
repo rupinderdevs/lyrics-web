@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
-// import Image from 'next/image'
 import axios from 'axios'
 import PostSkelton from 'components/skelton/PostSkelton'
 import PageHeader from 'components/PageHeader'
@@ -23,8 +22,6 @@ export async function getServerSideProps (context) {
 }
 
 export default function SinglePost ({ data }) {
-  console.log('loaddata__',data);
-  
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
@@ -64,6 +61,8 @@ export default function SinglePost ({ data }) {
   if (!loading) {
     return (
       <>
+        <div className='grid grid-cols-2'>
+<div>
         <PageHeader title={data.title.rendered.replace(/[^a-zA-Z ]/g, " ")} />
 
         <Head>
@@ -76,13 +75,17 @@ export default function SinglePost ({ data }) {
             <p className='text-shade-white text-xl font-normal'>
            <span className={styles.custom}  dangerouslySetInnerHTML={{ __html: data.content.rendered}} />
             </p>
-           
-            {/* <h3 className='text-shade-white text-3xl font-bold'>Tags</h3>
-            <p className='text-shade-white text-xl font-normal'>
-              {data.tags}
-            </p> */}
+      
           </div>
-        </div>
+            </div>
+          </div>
+          
+
+          {/* <div>
+            dddddd
+            dd
+          </div> */}
+          </div>
       </>
     )
   }

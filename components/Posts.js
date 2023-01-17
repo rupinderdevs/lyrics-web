@@ -5,8 +5,6 @@ import Image from 'next/image'
 import Music from 'assets/images/music.png'
 
 export default function Posts({ data, loading, title, perPage }) {
-
-  // console.log('daaataa+____', data.title);
   if (loading)
     return (
       <>
@@ -26,31 +24,23 @@ export default function Posts({ data, loading, title, perPage }) {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 mb-10'>
         {data.map((d, key) => {
           let today = new Date(d['date']).toLocaleDateString();
-        //   if(d.featured_media === 0 || d._embedded['wp:featuredmedia'][0].media_details === undefined){
-        //     imageSource = null;
-        // }
-        // else{
-        //     imageSource = d._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url;
-        // }
-          //  let URLIMAGE = d['_embedded']['wp:featuredmedia'][0]['source_url'];
-
-
-
+          // let URLIMAGE = d['_embedded']['wp:featuredmedia'][0].source_url
           return (
             // eslint-disable-next-line @next/next/link-passhref
             <Link key={key} href={`/latest/${d.slug}`}>
 
               <div className="card bg-white/[.10]  rounded-xl p-6 space-y-4">
-                <Image class="rounded-xl " src={Music} height={280} width={500} alt="music" />  
-               
-                {/* <img src={imageSource} alt="music"/>  */}
-                
-           
-                {/* <Image class="rounded-xl " src={Music} height={280} width={500} alt="music" /> */}
+                <Image className="rounded-xl " src={Music} height={280} width={500} alt={'Music'}
+                  title={data.title}
+                  priority={true} />
+
+                {/* <img src={URLIMAGE} alt="music" /> */}
+
+
+                {/* <Image className="rounded-xl " src={Music} height={280} width={500} alt="music" /> */}
                 <div id="description" className="space-y-4">
                   <a href="#">
-                    <h2 className="text-white font-semibold text-xl transition hover:text-cyan-300">
-                      {/* {d.title} */}
+                    <h2 className="text-white font-semibold text-xl transition-all duration-500 hover:text-shade-red">
                       {d['title']['rendered'].replace(/[^a-zA-Z ]/g, " ")}
                     </h2>
                   </a>
@@ -60,7 +50,6 @@ export default function Posts({ data, loading, title, perPage }) {
                       id="price"
                       className="text-white flex justify-between items-center"
                     >
-
                       Published on:
                     </span >
                     <span className="text-slate-500 flex justify-between items-center select-none">
@@ -81,17 +70,10 @@ export default function Posts({ data, loading, title, perPage }) {
                   </div>
                 </div>
               </div>
-
-
             </Link>
           )
         })}
       </div>
-      {/* <Link href='/posts'>
-          <a className='bg-shade-red/[.30] text-white mx-auto w-1/3 my-4 block text-center px-10 py-4 rounded-full'>
-            Latest Lyrics
-          </a>
-        </Link> */}
     </>
   )
 }

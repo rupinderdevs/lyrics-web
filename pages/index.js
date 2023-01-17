@@ -5,34 +5,46 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Hero from 'components/hero-section'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 const Home = ({ data, postData }) => {    
   const [loading, setLoading] = useState(false)
   const [postloading, setpostLoading] = useState(false)
 
   return (
-    <div>
-      <Layout title='Best Songs Lyrics'>
+    <>
+      <NextSeo
+      title={"Home - " + process.env.NEXT_PUBLIC_SITE_NAME}
+      description={`Access largest songs lyrics collection with ${process.env.NEXT_PUBLIC_SITE_NAME} Now.`}
+      canonical={process.env.NEXT_PUBLIC_DOMAIN_URL}
+      openGraph={{       
+        title: "All Songs Lyrics" +
+         process.env.NEXT_PUBLIC_SITE_NAME,
+        description: `Find latest songs lyrics`,
+        siteName: process.env.NEXT_PUBLIC_SITE_NAME
+      }} />
         <div>
-          <Hero/>
-      <div className='md:w-auto md:container md:mx-auto px-4'>
-          
-          <GroupPost
-            loading={loading}
-            data={data}
-            title='Top Previous'
-            numberCols='3'
-            seeAllbtn
-          />
-          <Posts data={postData} loading={postloading} title='Latest songs lyrics'/>
-          <Link href='/latest'>
-          <a className='bg-shade-red/[.30] text-white mx-auto w-1/3 my-4 block text-center px-10 py-4 rounded-full'>
-            View All          </a>
-        </Link>
+          <Layout title='All Songs Lyrics'>
+            <div>
+              <Hero />
+              <div className='md:w-auto md:container md:mx-auto px-4'>
+
+                <GroupPost
+                  loading={loading}
+                  data={data}
+                  title='Top Previous'
+                  numberCols='3'
+                  seeAllbtn />
+                <Posts data={postData} loading={postloading} title='Latest songs lyrics' />
+                <Link href='/latest'>
+                  <a className='bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full'>
+                    View All          </a>
+                </Link>
+              </div>
+            </div>
+          </Layout>
         </div>
-        </div>
-      </Layout>
-    </div>
+      </>
   )
 }
 

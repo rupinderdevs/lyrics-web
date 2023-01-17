@@ -17,7 +17,7 @@ const SingleLyrics = ({ title, id, Url, date, slug ,showNumber }) => {
       className='flex items-center space-x-4 py-6 md:py-6 px-8 md:px-10 border-1 bg-white/[.10]  hover:bg-white/[.10] transition duration-300'
     >
       <div className=' flex items-center justify-center w-10'>
-      <Image class="rounded-xl " src={Music} height={100} width={100} alt="music" />  
+      <Image className="rounded-xl " src={Music} height={100} width={100} alt="music" />  
         
       </div>
       <Link href={`/latest/${slug}`}>
