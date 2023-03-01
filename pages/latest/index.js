@@ -51,7 +51,7 @@ export default function LatestPosts() {
     <>
       <Layout title='Latest Posts - Lyrics'>
         <div>
-          <PageHeader title='Latest Posts' />
+          <PageHeader title='Latest Songs' />
         </div>
         <div className='px-8'> 
           <Posts perPage={perPage} data={postData} loading={postloading} />

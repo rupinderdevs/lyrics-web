@@ -6,6 +6,7 @@ import axios from 'axios'
 import Hero from 'components/hero-section'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
+import Head from 'next/head'
 
 const Home = ({ data, postData }) => {    
   const [loading, setLoading] = useState(false)
@@ -23,6 +24,16 @@ const Home = ({ data, postData }) => {
         description: `Find latest songs lyrics`,
         siteName: process.env.NEXT_PUBLIC_SITE_NAME
       }} />
+       <Head>
+      <title>All Songs Lyrics</title>
+      <meta name="robots" content="noindex,nofollow" />
+      <meta name="robots" content="all" />
+      <meta name="googlebot" content="noindex,nofollow" />
+      <meta name="google" content="nositelinkssearchbox" />
+      <meta name="google" content="notranslate" />
+      <link rel="canonical" href="https://www.songslyricsaz.com/" />
+
+      </Head>
         <div>
           <Layout title='All Songs Lyrics'>
             <div>
@@ -35,7 +46,7 @@ const Home = ({ data, postData }) => {
                   title='Top Previous'
                   numberCols='3'
                   seeAllbtn />
-                <Posts data={postData} loading={postloading} title='Latest songs lyrics' />
+                <Posts data={postData} loading={postloading} title='Latest Songs lyrics' />
                 <Link href='/latest'>
                   <a className='bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full'>
                     View All          </a>

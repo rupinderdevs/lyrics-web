@@ -2,7 +2,7 @@
 
 const Hero = ({}) => {
   return (
-    <section className="mb-40">
+    <section className="mb-36">
     <div
       className="relative overflow-hidden bg-no-repeat bg-cover"
       style={{
@@ -22,7 +22,7 @@ const Hero = ({}) => {
             backdropFilter: "blur(30px)"
           }}
         >
-          <h1 className="capitalize text-xl md:text-5xl font-bold mb-6 text-white">
+          <h1 className="capitalize text-xl md:text-6xl font-bold mb-6 text-white">
             The best <span className="text-[#c02026]">all songs lyrics </span>web Blog  <br />
             <span className="text-blue-300">on the Internet</span>
           </h1>          
