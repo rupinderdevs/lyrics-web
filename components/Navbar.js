@@ -20,7 +20,7 @@ export default function Navbar() {
       href: '/'
     },
     {
-      name: 'Latest Songs',
+      name: 'Latest Hindi Songs',
       href: '/latest'
     },
     // {
@@ -31,10 +31,10 @@ export default function Navbar() {
       name: 'Punjabi Songs',
       href: '/categories/punjabi'
     },
-    {
-      name: 'Hindi Songs',
-      href: '/categories/hindi'
-    },
+    // {
+    //   name: 'Hindi Songs',
+    //   href: '/categories/hindi'
+    // },
     // {
     //   name: 'English Songs',
     //   href: '/categories/english'

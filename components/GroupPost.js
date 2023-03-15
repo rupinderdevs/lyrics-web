@@ -26,7 +26,7 @@ export default function GroupPost ({
     )
   return (
     <div className='text-center my-10 md:my-20 text-white '>
-      <span className='text-3xl xl:text-4xl font-bold uppercase'>Popular Lyrics</span>
+      <span className='text-3xl xl:text-4xl font-bold uppercase'>Popular Hindi Songs Lyrics</span>
       <div
         className={`text-left my-10 md:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-${numberCols} gap-8`}
       >
@@ -35,7 +35,7 @@ export default function GroupPost ({
               return (
                 <SingleLyrics
                   key={key}
-                  title={d.title.rendered}
+                  title={d.title.rendered.replace(/[^a-zA-Z ]/g, " ")}
                   slug={d.slug}
                   id={d.id}
                   Url={d.source_url}

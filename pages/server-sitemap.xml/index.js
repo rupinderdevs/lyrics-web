@@ -8,7 +8,7 @@ export const getServerSideProps = async (ctx) => {
     let allPosts = []; // an array to store all posts
 
     while (true) {
-        try {
+        // try {
             const response = await axios.get(
                 `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?_fields=slug,date&per_page=${perPage}&page=${currentPage}`
             );
@@ -19,15 +19,15 @@ export const getServerSideProps = async (ctx) => {
                     break;
                 }
                 allPosts = [...allPosts, ...posts]; // add the new posts to the array
-                console.log("posts", posts)
+                console.log("posts====>", posts)
                 currentPage++; // move to the next page
             } else {
                 break;
             }
 
-        } catch (error) {
+        // } catch (error) {
             break;
-        }
+        // }
     }
     const newsSitemaps = allPosts.map(item => ({
         loc: `${process.env.NEXT_PUBLIC_SITE_NAME}/${item.slug}`,
