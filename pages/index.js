@@ -47,7 +47,7 @@ const Home = ({ data, postData }) => {
                 numberCols='3'
                 seeAllbtn />
               <Posts data={postData} loading={postloading} title='Latest Punjabi Songs' />
-              <Link href='/categories/punjabi' >               
+              <Link passHref="" href='/categories/punjabi' >               
                  <span className='cursor-pointer bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full'> View All  </span>      
               </Link>
             </div>

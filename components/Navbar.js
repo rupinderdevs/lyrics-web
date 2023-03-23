@@ -20,13 +20,14 @@ export default function Navbar() {
       href: '/'
     },
     {
+      name: 'About',
+      href: '/about'
+    },
+    {
       name: 'Latest Hindi Songs',
       href: '/latest'
     },
-    // {
-    //   name: 'Categories',
-    //   href: '/categories'
-    // },
+   
     {
       name: 'Punjabi Songs',
       href: '/categories/punjabi'
@@ -49,7 +50,7 @@ export default function Navbar() {
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-             <a href='/'> <Image width={64} height={64} src={Logo} alt='logo'/> </a>
+             <Link passHref href='/'> <Image width={64} height={64} src={Logo} alt='logo'/> </Link>
               <div className="md:hidden">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none"

@@ -25,7 +25,7 @@ const Hero = ({ }) => {
             <h1 className="capitalize text-xl md:text-6xl font-bold mb-6 text-white">
              Best <span className="text-[#c02026]">songs lyrics </span>Platform  <br />           
             </h1>
-            <p className="text-xl text-white">It's a place where all searches end!</p>
+            <p className="text-xl text-white">song lyrics website that provides access to the lyrics of various songs</p>
               <p  className="text-xl text-white">We have a large, legal, every day growing universe of lyrics where stars of all genres and ages shine.</p>
             </div>
           </div>
