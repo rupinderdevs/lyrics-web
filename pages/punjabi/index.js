@@ -5,27 +5,25 @@ import Posts from 'components/Posts'
 import axios from 'axios'
 import Pagination from 'components/Pagination'
 
-export default function LatestPosts() {
-
+export default function Punjabi () {
   const [postData, setpostData] = useState([])
   const [postloading, setpostLoading] = useState(true)
   const [totalpages, setTotalpages] = useState(0)
   const [offsetValue, setOffsetValue] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const perPage = 7
+  const perPage = 15
 
   const loadposts = async () => {
     setpostLoading((postloading = true))
     try {
       const loaddata = await axios.get(
-        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=${perPage}&offset=${offsetValue}`        
-      )
-      // _fields=acf,source_url,title,slug
+        `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=${perPage}&offset=${offsetValue}`       
+      )      
       setpostData((postData = loaddata?.data))
       setTotalpages((totalpages = loaddata?.headers['x-wp-totalpages']))
       setpostLoading((postloading = false))
 
-      // console.log('loadd+++++++++++++++++',postData);
+      // console.log('loadd+++++++++++++++++',loaddata.data);
     } catch (e) {
       console.log('error', e)
       setpostLoading((postloading = false))
@@ -40,6 +38,7 @@ export default function LatestPosts() {
       left: 0,
       behavior: 'smooth'
     })
+    //console.log(activePage)
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -48,13 +47,11 @@ export default function LatestPosts() {
   }, [])
   return (
     <>
-      <Layout title='Latest Posts - Lyrics'>
+      <Layout title='Latest Posts - Songs Lyrics'>
         <div>
-          <PageHeader title='Latest Songs' />
+          <PageHeader title='Latest Punjabi Songs' />
         </div>
-        <div className='px-8'> 
-          <Posts perPage={perPage} data={postData} loading={postloading} />
-          </div>
+     <div className='px-8'>   <Posts perPage={perPage} data={postData} loading={postloading} /></div>
         <div className='my-10'>
           <Pagination
             currentPage={currentPage}

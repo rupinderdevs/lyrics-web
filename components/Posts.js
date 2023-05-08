@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Music from 'assets/images/music.png'
 
 export default function Posts({ data, loading, title, perPage }) {
+  // console.log('data posts===>', data);
   if (loading)
     return (
       <>
@@ -23,7 +24,7 @@ export default function Posts({ data, loading, title, perPage }) {
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 mb-10'>
         {data.map((d, key) => {
-          console.log('d', d);
+          // console.log('d', d);
           let today = new Date(d['date']).toLocaleDateString();
           // let URLIMAGE = d['_embedded']['wp:featuredmedia'][0].source_url
           return (
@@ -40,7 +41,7 @@ export default function Posts({ data, loading, title, perPage }) {
 
                 {/* <Image className="rounded-xl " src={Music} height={280} width={500} alt="music" /> */}
                 <div id="description" className="space-y-4">
-                  <a href="#">
+                  <a href={`latest/${d.slug}`}>
                     <h2 className="text-white font-semibold text-xl transition-all duration-500 hover:text-shade-red">
                        {d['title']['rendered'].replace(/[^a-zA-Z ]/g, " ")}
                     </h2>

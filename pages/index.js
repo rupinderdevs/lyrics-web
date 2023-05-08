@@ -1,17 +1,16 @@
-import GroupPost from 'components/GroupPost'
-import Layout from 'components/Layout'
-import Posts from 'components/Posts'
-import React, { useState } from 'react'
-import axios from 'axios'
-import Hero from 'components/hero-section'
-import Link from 'next/link'
-import { NextSeo } from 'next-seo'
-import Head from 'next/head'
+import GroupPost from "components/GroupPost";
+import Layout from "components/Layout";
+import Posts from "components/Posts";
+import React, { useState } from "react";
+import axios from "axios";
+import Hero from "components/hero-section";
+import Link from "next/link";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 const Home = ({ data, postData }) => {
-  console.log('home page+++',postData);
-  const [loading, setLoading] = useState(false)
-  const [postloading, setpostLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
+  const [postloading, setpostLoading] = useState(false);
 
   return (
     <>
@@ -20,11 +19,11 @@ const Home = ({ data, postData }) => {
         description={`Access largest songs lyrics collection with ${process.env.NEXT_PUBLIC_SITE_NAME} Now.`}
         canonical={process.env.NEXT_PUBLIC_DOMAIN_URL}
         openGraph={{
-          title: "All Songs Lyrics" +
-            process.env.NEXT_PUBLIC_SITE_NAME,
+          title: "All Songs Lyrics" + process.env.NEXT_PUBLIC_SITE_NAME,
           description: `Find latest songs lyrics`,
-          siteName: process.env.NEXT_PUBLIC_SITE_NAME
-        }} />
+          siteName: process.env.NEXT_PUBLIC_SITE_NAME,
+        }}
+      />
       <Head>
         <title>All Songs Lyrics</title>
         <meta name="robots" content="noindex,nofollow" />
@@ -33,48 +32,65 @@ const Home = ({ data, postData }) => {
         <meta name="google" content="nositelinkssearchbox" />
         <meta name="google" content="notranslate" />
         <link rel="canonical" href="https://www.songslyricsaz.com/" />
-
       </Head>
       <div>
-        <Layout title='All Songs Lyrics'>
+        <Layout title="All Songs Lyrics">
           <div>
             <Hero />
-            <div className='md:w-auto md:container md:mx-auto px-4'>
-
-              <GroupPost
+            <div className="md:w-auto md:container md:mx-auto px-4">
+              {/* <GroupPost
                 loading={loading}
                 data={data}
                 numberCols='3'
-                seeAllbtn />
-              <Posts data={postData} loading={postloading} title='Latest Punjabi Songs' />
-              <Link passHref="" href='/categories/punjabi' >               
-                 <span className='cursor-pointer bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full'> View All  </span>      
+                seeAllbtn /> */}
+              <Posts
+                data={data}
+                loading={postloading}
+                title="Latest Punjabi Songs"
+              />
+              <Link href="/punjabi">
+                <span className="cursor-pointer bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full">
+                  {" "}
+                  View All
+                </span>
               </Link>
             </div>
           </div>
         </Layout>
       </div>
     </>
-  )
-}
+  );
+};
 
-export async function getStaticProps() {
-  const loadData = await axios.get(
-    `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=9&per_page=6`
-    // `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/media?_fields=source_url,title,id,date,slug&per_page=9&per_page=6`
-    // /wp-json/wp/v2/posts?categories=14
-  )
-  const loadPostData = await axios.get(
+export const getStaticProps = async () => {
+  // pbi songs
+  const { data: loadData } = await axios.get(
     `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=6`
-    // `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?_fields=acf,source_url,title,id,date,slug&per_page=6`      
-    
-  )
-  let postData = loadPostData?.data || []
-  let data = loadData?.data || []
-  return {
-    props: { data, postData },
-    revalidate: 1000
-  }
-}
+  );
+  const data = loadData || [];
 
-export default Home
+  return {
+    props: { data },
+    revalidate: 1000,
+  };
+};
+
+// export async function getStaticProps() {
+//   const { data: loadData } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=9&per_page=6`
+//   );
+
+//   const { data: loadPostData } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=6`
+//   );
+
+//   const postData = loadPostData || [];
+//   const data = loadData || [];
+
+//   return {
+//     props: { data, postData },
+//     revalidate: 1000,
+//   };
+// }
+
+export default Home;

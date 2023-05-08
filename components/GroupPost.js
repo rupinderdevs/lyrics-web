@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import SingleLyrics from './SingleLyrics'
 import GroupPostSkelton from './skelton/GroupPostSkelton'
-import Link from 'next/link'
 
 export default function GroupPost ({
   data,
