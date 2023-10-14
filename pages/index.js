@@ -9,7 +9,7 @@ import { NextSeo } from "next-seo";
 import Head from "next/head";
 
 const Home = ({ data, postData }) => {
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [postloading, setpostLoading] = useState(false);
 
   return (
@@ -38,19 +38,20 @@ const Home = ({ data, postData }) => {
           <div>
             <Hero />
             <div className="md:w-auto md:container md:mx-auto px-4">
-              {/* <GroupPost
+              <GroupPost
                 loading={loading}
                 data={data}
-                numberCols='3'
-                seeAllbtn /> */}
-              <Posts
-                data={data}
-                loading={postloading}
-                title="Latest Punjabi Songs"
+                title="Top Previous"
+                numberCols="3"
+                seeAllbtn
               />
-              <Link passHref href="/punjabi">
-                <span className="cursor-pointer bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full">
-                  {" "}
+              <Posts
+                data={postData}
+                loading={postloading}
+                title="Latest Songs lyrics"
+              />
+              <Link href="/latest">
+                <span className="bg-shade-red/[.30] text-white mx-auto w-full md:w-1/3 my-4 block text-center px-10 py-4 rounded-full">
                   View All
                 </span>
               </Link>
@@ -62,35 +63,21 @@ const Home = ({ data, postData }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  // pbi songs
-  const { data: loadData } = await axios.get(
-    `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=6`
+export async function getStaticProps() {
+  const loadData = await axios.get(
+    // `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/media?_fields=source_url,title,id,date,slug&per_page=9&per_page=6`
+    `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=6`
   );
-  const data = loadData || [];
-
+  const loadPostData = await axios.get(
+    // `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?_fields=acf,source_url,title,id,date,slug&per_page=6`
+    `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=9`
+  );
+  let postData = loadPostData?.data || [];
+  let data = loadData?.data || [];
   return {
-    props: { data },
+    props: { data, postData },
     revalidate: 1000,
   };
-};
-
-// export async function getStaticProps() {
-//   const { data: loadData } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=13&per_page=9&per_page=6`
-//   );
-
-//   const { data: loadPostData } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/posts?categories=14&per_page=6`
-//   );
-
-//   const postData = loadPostData || [];
-//   const data = loadData || [];
-
-//   return {
-//     props: { data, postData },
-//     revalidate: 1000,
-//   };
-// }
+}
 
 export default Home;
